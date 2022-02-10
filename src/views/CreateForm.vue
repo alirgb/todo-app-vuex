@@ -11,11 +11,11 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="todoTitle"
-                rules="required|max:10"
+                rules="required|max:20"
               >
                 <v-text-field
                   v-model="todoTitle"
-                  :counter="10"
+                  :counter="20"
                   :error-messages="errors"
                   label="Title"
                   required
@@ -35,10 +35,11 @@
                   required
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mr-4" @click="submitNewTodo" :disabled="invalid">
-                Save
-              </v-btn>
-              <v-btn @click="clear"> clear </v-btn>
+              <v-card-actions>
+                <v-btn @click="submitNewTodo" :disabled="invalid"> Save </v-btn>
+                <v-btn @click="clear"> Clear </v-btn>
+                <v-btn color="error" @click="back"> Back </v-btn>
+              </v-card-actions>
             </form>
           </validation-observer>
         </v-col>
@@ -109,6 +110,9 @@ export default {
       this.todoBody = "";
 
       this.$refs.observer.reset();
+    },
+    back() {
+      this.$router.push({ name: "Home" });
     },
   },
 };

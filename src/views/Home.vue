@@ -15,7 +15,7 @@
         </v-col>
         <v-col cols="3">
           <!-- <todo-list></todo-list> -->
-          <list @setTodo="showTodo" />
+          <list :edit="false" @setTodo="showTodo" />
         </v-col>
         <!-- show Todo here -->
         <show :todo="todo" v-if="edit === false" @editTodo="willeditTodo" />
@@ -52,7 +52,9 @@ export default {
   methods: {
     ...mapActions(["loadTodos"]),
     showTodo(todo) {
-      this.todo = todo;
+      if (this.edit === false) {
+        this.todo = todo;
+      }
     },
     willeditTodo() {
       this.edit = true; //edit comp #####

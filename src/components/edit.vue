@@ -17,7 +17,9 @@
         <v-checkbox v-model="newTodo.done" :ripple="false"></v-checkbox>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" @click="update(newTodo.id)"> Update </v-btn>
+        <v-btn color="primary" @click="update()" :disabled="disabled">
+          Update
+        </v-btn>
         <v-btn color="error" @click="cancel"> Cancel </v-btn>
       </v-card-actions>
     </v-card>
@@ -39,18 +41,33 @@ export default {
   },
   computed: {
     ...mapGetters(["thisTodo"]),
+    disabled() {
+      if (
+        this.todo.title === this.newTodo.title &&
+        this.todo.body === this.newTodo.body &&
+        this.todo.done === this.newTodo.done
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     cancel() {
       this.editFlag = false;
       this.$emit("editFlag");
     },
-    update(todoId) {
-      let todo = this.thisTodo(todoId);
-      if (todo === this.newTodo) {
-        console.log("no change");
-      } else {
-        console.log("there is change");
+    update() {
+      if (
+        this.todo.title !== this.newTodo.title ||
+        this.todo.body !== this.newTodo.body ||
+        this.todo.done !== this.newTodo.done
+      ) {
+        this.todo.title = this.newTodo.title;
+        this.todo.body = this.newTodo.body;
+        this.todo.done = this.newTodo.done;
+        this.cancel();
       }
     },
   },
