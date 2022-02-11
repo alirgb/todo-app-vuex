@@ -1,6 +1,5 @@
 <template>
-  <v-col cols="6" v-if="todo !== null">
-    <v-card>
+  <v-card v-if="todo !== null">
       <v-card-title> Task: {{ todo.title }} </v-card-title>
 
       <v-card-text>
@@ -19,7 +18,9 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-  </v-col>
+
+    
+
 </template>
 
 <script>

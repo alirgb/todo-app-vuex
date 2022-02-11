@@ -1,10 +1,10 @@
 <template>
-  <v-col cols="6" v-if="newTodo !== null">
-    <v-card>
+
+    <v-card v-if="newTodo !== null">
       <v-card-title>
         <v-text-field
           v-model="newTodo.title"
-          :counter="10"
+          :counter="20"
           label="Title"
         ></v-text-field>
       </v-card-title>
@@ -23,12 +23,10 @@
         <v-btn color="error" @click="cancel"> Cancel </v-btn>
       </v-card-actions>
     </v-card>
-  </v-col>
+
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   props: ["todo"],
   components: {},
@@ -40,7 +38,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["thisTodo"]),
     disabled() {
       if (
         this.todo.title === this.newTodo.title &&

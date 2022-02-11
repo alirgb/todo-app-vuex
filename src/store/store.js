@@ -54,12 +54,10 @@ const store = new Vuex.Store({
     },
   },
   getters: {
-    isTodosEmpty: (state) => {
-      return state.todos.length === 0;
-    },
-    thisTodo: (state) => (todoId) => {
-      return state.todos.find((todo) => todo.id === todoId);
-    },
+    isTodosEmpty:state=>state.todos.length === 0,
+    thisTodo:state=> (callback,id)=>callback(state,id)
+    
+    
   },
 });
 

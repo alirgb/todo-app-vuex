@@ -1,6 +1,8 @@
 <template>
+<div>
   <v-card>
     <v-card-title>
+
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
@@ -8,6 +10,25 @@
         single-line
         hide-details
       ></v-text-field>
+      <v-card-text>
+        <p>
+      Completed Tasks:
+      {{
+        todos.filter((todo) => {
+          return todo.done === true;
+        }).length
+      }}
+    </p>
+
+    <p>
+      Pending Tasks:
+      {{
+        todos.filter((todo) => {
+          return todo.done === false;
+        }).length
+      }}
+    </p>
+      </v-card-text>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -23,6 +44,8 @@
       </template>
     </v-data-table>
   </v-card>
+</div>
+    
 </template>
 
 <script>
